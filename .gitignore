@@ -1,0 +1,36 @@
+# Maven / Java
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Spring Boot
+spring-shell.log
+
+# Angular (D5)
+node_modules/
+dist/
+.angular/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+*.code-workspace
+
+# OS / Docker
+.DS_Store
+Thumbs.db
+.env
+docker-compose.override.yml
+
+# Logs / temp
+*.log
+tmp/
+temp/
