@@ -22,6 +22,7 @@
     <module>eureka-server</module>
     <module>identity-service</module>
     <module>gateway-service</module>
+    <module>booking-service</module>
   </modules>
 
   <properties>

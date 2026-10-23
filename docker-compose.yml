@@ -69,10 +69,17 @@ services:
       JWT_SECRET: ${JWT_SECRET:?Define JWT_SECRET con al menos 32 caracteres antes de levantar}
     depends_on: [postgres-users, eureka]
     restart: unless-stopped
-  # booking:
-  #   build: ./booking-service
-  #   ports: ["8082:8082"]
-  #   depends_on: [postgres-booking, kafka, eureka]
+  booking:
+    build:
+      context: .
+      dockerfile: ./booking-service/Dockerfile
+    ports: ["8082:8082"]
+    environment:
+      DB_HOST: postgres-booking
+      DB_PORT: 5432
+      EUREKA_HOST: eureka
+    depends_on: [postgres-booking, eureka]
+    restart: unless-stopped
 
 volumes:
   pg-users: {}

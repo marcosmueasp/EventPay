@@ -7,9 +7,10 @@ Kafka es siempre Apache Kafka local (`kafka:9092` en compose, `localhost:29092` 
 
 ## Orden de trabajo (D1 -> D7)
 1. D1: infra compose + identity (register/login JWT) + Gateway route `/auth/**`.
-2. D2: booking-service hexagonal síncrono (dominio puro + ports + JPA + REST).
+2. D2: booking-service hexagonal síncrono (dominio puro + ports + JPA + REST), con aforo por
+   escritura condicional e idempotencia global.
 3. D3: Kafka (`booking.requested` -> worker simulado -> `payment.result` + DLT).
-4. D4: Gateway AuthFilter (JWT -> `X-User-Id`), Eureka, idempotencia, SSE.
+4. D4: Gateway AuthFilter (JWT -> `X-User-Id`), Eureka, SSE.
 5. D5: Angular 18 (auth interceptor, events, bookings, SSE).
 6. D6-D7: tests + README demo + tag `v0.1-mvp`.
 

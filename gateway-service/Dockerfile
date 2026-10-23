@@ -5,6 +5,7 @@ COPY pom.xml /app/pom.xml
 COPY eureka-server/pom.xml /app/eureka-server/pom.xml
 COPY identity-service/pom.xml /app/identity-service/pom.xml
 COPY gateway-service/pom.xml /app/gateway-service/pom.xml
+COPY booking-service/pom.xml /app/booking-service/pom.xml
 RUN mvn -q -pl gateway-service dependency:go-offline
 COPY gateway-service/src /app/gateway-service/src
 RUN mvn -q -pl gateway-service -am package -DskipTests
