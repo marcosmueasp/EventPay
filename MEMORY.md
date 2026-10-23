@@ -93,8 +93,18 @@ Kafka: `kafka:9092` en compose, `localhost:29092` en local.
 - Persistencia (RF14): tras reiniciar el servicio se conservan eventos y reservas, y la clave usada
   sigue devolviendo `409` de idempotencia.
 - Con Kafka parado (RF16) la API responde con normalidad y `dependency:tree` no contiene `kafka`.
-- Entorno local de este equipo: `eureka`, `kafka` y `postgres-users` parados e `identity` en
-  crash-loop por falta de `JWT_SECRET`/`postgres-users`; booking arranca y responde sin Eureka (solo WARN).
+- `docker compose up --build -d` -> **7/7 servicios `Up`**: `postgres-users` (5433), `postgres-booking`
+  (5434), `kafka` (9092/29092), `eureka` (8761), `identity` (8081, `RestartCount=0`), `gateway` (8080)
+  y `booking` (8082); Eureka registra `BOOKING-SERVICE`, `IDENTITY-SERVICE` y `GATEWAY-SERVICE` `[UP]`.
+  Este es el criterio §11.2 / RNF5, demostrado tras el commit de cierre.
+- Demo verificada: register `201` y login `200` (con token) por el gateway `:8080`; por `:8082`
+  (el gateway no publica `/api/**` hasta D4, decisión D5: es lo esperado en D2) evento `201`, reserva
+  `201 PENDING`, segunda reserva `409` y `/me` `200` con la reserva.
+- `docker compose` **exige `JWT_SECRET` (32+ caracteres) en el entorno incluso para `ps`, `logs` y
+  `down`**, porque `${JWT_SECRET:?...}` se interpola al parsear el fichero; el secreto no se escribe
+  nunca en el repo. `identity` en crash-loop = casi siempre falta ese secreto, no un fallo de D1.
+- Datos: tablas de booking truncadas tras la demo; quedan 2 usuarios de prueba `demo.d2.*` en `users-db`.
+- El stack se dejó levantado para la demo; para pararlo: `docker compose down` (sin volúmenes).
 
 ## 6. Comandos
 
