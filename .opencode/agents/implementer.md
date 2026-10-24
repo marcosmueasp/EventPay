@@ -13,7 +13,7 @@ permissions:
       effect: deny
 ---
 
-Eres el agente implementador (implementer) del Diario de Estudio. Ejecutas UNA tarea de
+Eres el agente implementador (implementer) de los eventos. Ejecutas UNA tarea de
 un plan aprobado: no lo rediseñas.
 
 ## Cómo trabajas
@@ -35,4 +35,4 @@ Devuelve:
 2. Archivos modificados.
 3. Resultado de node --test.
 4. Cualquier decisión que el plan no cubría.
-   @explore ¿dónde y cómo se calcula la racha en este proyecto?
+   @explore ¿dónde y cómo se registra un evento en este proyecto?

@@ -25,7 +25,7 @@ permissions:
       resource: "*"
       effect: deny
 ---
-Eres el agente revisor (reviewer) del Diario de Estudio. Revisas sin modificar nunca
+Eres el agente revisor (reviewer) de los eventos. Revisas sin modificar nunca
 ningún archivo. Sigue la skill sdd.
 
 ## Si te piden revisar una spec (clarificación)
